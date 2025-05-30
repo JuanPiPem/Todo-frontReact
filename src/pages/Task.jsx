@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { getTasks, createTask, deleteTask } from "../services/taskService";
 import { useNavigate } from "react-router-dom";
+import Header from "../components/Header";
 
 const Task = () => {
   const [tasks, setTasks] = useState([]);
@@ -44,45 +45,49 @@ const Task = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
-      <div className="max-w-xl mx-auto bg-white p-6 rounded-xl shadow-md">
-        <h2 className="text-2xl font-semibold mb-4 text-center">My Tasks</h2>
-        <form onSubmit={handleCreate} className="flex gap-2 mb-6">
-          <input
-            type="text"
-            placeholder="New task"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            className="flex-grow p-2 border border-gray-300 rounded"
-          />
-          <button
-            type="submit"
-            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-          >
-            Add
-          </button>
-        </form>
-        <ul>
-          {tasks.map((task) => (
-            <li
-              key={task._id}
-              className="flex justify-between items-center border-b py-2"
+    <>
+      <Header />
+
+      <div className="min-h-screen bg-gray-100 p-6">
+        <div className="max-w-xl mx-auto bg-white p-6 rounded-xl shadow-md">
+          <h2 className="text-2xl font-semibold mb-4 text-center">My Tasks</h2>
+          <form onSubmit={handleCreate} className="flex gap-2 mb-6">
+            <input
+              type="text"
+              placeholder="New task"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              className="flex-grow p-2 border border-gray-300 rounded"
+            />
+            <button
+              type="submit"
+              className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
             >
-              <span>{task.title}</span>
-              <button
-                onClick={() => handleDelete(task._id)}
-                className="text-red-500 hover:text-red-700 text-sm"
+              Add
+            </button>
+          </form>
+          <ul>
+            {tasks.map((task) => (
+              <li
+                key={task._id}
+                className="flex justify-between items-center border-b py-2"
               >
-                Delete
-              </button>
-            </li>
-          ))}
-          {tasks.length === 0 && (
-            <li className="text-gray-500 text-center">No tasks yet.</li>
-          )}
-        </ul>
+                <span>{task.title}</span>
+                <button
+                  onClick={() => handleDelete(task._id)}
+                  className="text-red-500 hover:text-red-700 text-sm"
+                >
+                  Delete
+                </button>
+              </li>
+            ))}
+            {tasks.length === 0 && (
+              <li className="text-gray-500 text-center">No tasks yet.</li>
+            )}
+          </ul>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

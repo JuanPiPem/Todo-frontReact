@@ -18,6 +18,8 @@ const Login = () => {
         form
       );
       localStorage.setItem("token", res.data.token);
+      localStorage.setItem("user", JSON.stringify(res.data.user));
+
       navigate("/tasks");
     } catch (err) {
       alert("Login failed");
