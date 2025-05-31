@@ -152,10 +152,12 @@ const Task = () => {
                 </div>
                 <button
                   onClick={() => handleDelete(task._id)}
-                  className="text-red-500 hover:text-red-700 text-base md:text-sm"
+                  className="text-red-500 hover:text-red-700 flex items-center gap-1"
                   title="Eliminar tarea"
                 >
-                  <FaTrash className="w-4 h-4 md:w-3 md:h-3" />
+                  <FaTrash className="w-4 h-4 md:hidden" />
+
+                  <span className="hidden md:inline">Delete</span>
                 </button>
               </li>
             ))}

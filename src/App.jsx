@@ -13,14 +13,13 @@ import Footer from "./components/Footer";
 import { ThemeProvider } from "./context/ThemeContext";
 import { useEffect } from "react";
 
-// Layout wrapper para incluir header/footer solo cuando sea necesario
 const Layout = ({ children }) => {
   const location = useLocation();
   const hideLayout =
     location.pathname === "/" || location.pathname === "/register";
 
   useEffect(() => {
-    window.scrollTo(0, 0); // opcional: para que al cambiar de página, vaya al top
+    window.scrollTo(0, 0);
   }, [location]);
 
   return (

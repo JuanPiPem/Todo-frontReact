@@ -1,7 +1,7 @@
 // src/components/Header.jsx
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { User } from "lucide-react";
+import { User, LogOut } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
 
 const Header = () => {
@@ -50,9 +50,12 @@ const Header = () => {
             </div>
             <button
               onClick={handleLogout}
-              className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+              className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 flex items-center gap-2"
+              title="Logout"
             >
-              Logout
+              {/* Ícono solo en mobile */}
+              <LogOut className="w-5 h-5 md:hidden" />
+              <span className="hidden md:inline">Logout</span>
             </button>
           </>
         )}
