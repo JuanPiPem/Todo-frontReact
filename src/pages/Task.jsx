@@ -1,6 +1,7 @@
 // src/pages/Task.jsx
 import { useEffect, useState } from "react";
 import { FaTrash } from "react-icons/fa";
+import { useTheme } from "../context/ThemeContext";
 
 import {
   getTasks,
@@ -11,8 +12,10 @@ import {
 import { useNavigate } from "react-router-dom";
 
 const Task = () => {
+  const { theme, setTheme } = useTheme();
   const [tasks, setTasks] = useState([]);
   const [title, setTitle] = useState("");
+
   const navigate = useNavigate();
 
   const handleToggleCompleted = async (task) => {
@@ -61,10 +64,46 @@ const Task = () => {
     }
   };
 
+  const cardBg =
+    theme === "light"
+      ? "bg-white"
+      : theme === "dark"
+      ? "bg-gray-800"
+      : "bg-cyan-200";
+  const textColor = theme === "dark" ? "text-white" : "text-black";
+  const inputBg =
+    theme === "dark"
+      ? "bg-gray-700 text-white border-gray-500"
+      : "bg-white text-black border-gray-300";
+  const buttonBg =
+    theme === "dark"
+      ? "bg-blue-500 hover:bg-blue-600"
+      : "bg-blue-600 hover:bg-blue-700";
+
   return (
     <>
       <div className="min-h-screen bg-gray-100 p-6">
-        <div className="max-w-xl mx-auto bg-cyan-200 p-6 rounded-xl shadow-md mt-40">
+        <div className="flex justify-center gap-4 mb-6">
+          <button
+            onClick={() => setTheme("light")}
+            className="w-6 h-6 rounded-full bg-white border border-gray-300"
+            title="Modo claro"
+          ></button>
+          <button
+            onClick={() => setTheme("cyan")}
+            className="w-6 h-6 rounded-full bg-cyan-200 border border-gray-300"
+            title="Modo cian"
+          ></button>
+          <button
+            onClick={() => setTheme("dark")}
+            className="w-6 h-6 rounded-full bg-gray-800 border border-gray-500"
+            title="Modo oscuro"
+          ></button>
+        </div>
+
+        <div
+          className={`max-w-xl mx-auto p-6 rounded-xl shadow-md ${cardBg} ${textColor}`}
+        >
           <h2 className="text-2xl font-semibold mb-4 text-center">My Tasks</h2>
           <form onSubmit={handleCreate} className="flex gap-2 mb-6">
             <input
@@ -72,11 +111,11 @@ const Task = () => {
               placeholder="New task"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="flex-grow p-2 border border-gray-300 rounded"
+              className={`flex-grow p-2 border rounded ${inputBg}`}
             />
             <button
               type="submit"
-              className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+              className={`${buttonBg} text-white px-4 py-2 rounded`}
             >
               Add
             </button>
@@ -88,11 +127,19 @@ const Task = () => {
                 className="flex justify-between items-center border-b py-2"
               >
                 <div className="flex items-center gap-2">
-                  <input
-                    type="checkbox"
-                    checked={task.completed}
-                    onChange={() => handleToggleCompleted(task)}
-                  />
+                  <label className="inline-flex items-center cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={task.completed}
+                      onChange={() => handleToggleCompleted(task)}
+                      className={`w-4 h-4 rounded transition duration-200 ease-in-out
+          ${
+            theme === "dark"
+              ? "accent-blue-400 border-gray-500 bg-gray-700"
+              : "accent-blue-600 border-gray-300"
+          }`}
+                    />
+                  </label>
                   <span
                     className={`text-lg ${
                       task.completed
@@ -105,16 +152,10 @@ const Task = () => {
                 </div>
                 <button
                   onClick={() => handleDelete(task._id)}
-                  className="text-red-500 hover:text-red-700 text-sm flex items-center"
-                  title="Delete task"
+                  className="text-red-500 hover:text-red-700 text-base md:text-sm"
+                  title="Eliminar tarea"
                 >
-                  {/* Ícono visible solo en mobile */}
-                  <FaTrash className="text-base block sm:hidden" />
-
-                  {/* Texto visible solo en pantallas medianas en adelante */}
-                  <span className="hidden sm:inline text-base font-medium">
-                    Delete
-                  </span>
+                  <FaTrash className="w-4 h-4 md:w-3 md:h-3" />
                 </button>
               </li>
             ))}
