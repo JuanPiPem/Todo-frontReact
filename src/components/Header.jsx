@@ -21,7 +21,7 @@ const Header = () => {
   };
 
   return (
-    <header className="flex justify-between items-center bg-white p-4 shadow-md">
+    <header className="sticky top-0 z-50 bg-white p-4 shadow-md flex justify-between items-center">
       <h1
         className="text-xl font-semibold cursor-pointer"
         onClick={() => navigate("/tasks")}

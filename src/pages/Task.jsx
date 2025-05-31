@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react";
 import { getTasks, createTask, deleteTask } from "../services/taskService";
 import { useNavigate } from "react-router-dom";
-import Header from "../components/Header";
 
 const Task = () => {
   const [tasks, setTasks] = useState([]);
@@ -46,8 +45,6 @@ const Task = () => {
 
   return (
     <>
-      <Header />
-
       <div className="min-h-screen bg-gray-100 p-6">
         <div className="max-w-xl mx-auto bg-white p-6 rounded-xl shadow-md">
           <h2 className="text-2xl font-semibold mb-4 text-center">My Tasks</h2>
