@@ -25,10 +25,10 @@ export const deleteTask = async (taskId) => {
   return response.data;
 };
 
-export const updateTask = async (taskId, updates) => {
+export const updateTask = async (id, updatedData) => {
   const response = await axios.put(
-    `${API_URL}/${taskId}`,
-    updates,
+    `${API_URL}/${id}`,
+    updatedData,
     getAuthHeaders()
   );
   return response.data;

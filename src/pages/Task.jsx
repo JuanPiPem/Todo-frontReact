@@ -1,12 +1,30 @@
 // src/pages/Task.jsx
 import { useEffect, useState } from "react";
-import { getTasks, createTask, deleteTask } from "../services/taskService";
+import { FaTrash } from "react-icons/fa";
+
+import {
+  getTasks,
+  createTask,
+  deleteTask,
+  updateTask,
+} from "../services/taskService";
 import { useNavigate } from "react-router-dom";
 
 const Task = () => {
   const [tasks, setTasks] = useState([]);
   const [title, setTitle] = useState("");
   const navigate = useNavigate();
+
+  const handleToggleCompleted = async (task) => {
+    try {
+      const updatedTask = await updateTask(task._id, {
+        completed: !task.completed,
+      });
+      setTasks(tasks.map((t) => (t._id === task._id ? updatedTask : t)));
+    } catch (error) {
+      alert("Error updating task");
+    }
+  };
 
   useEffect(() => {
     const fetchTasks = async () => {
@@ -69,12 +87,34 @@ const Task = () => {
                 key={task._id}
                 className="flex justify-between items-center border-b py-2"
               >
-                <span>{task.title}</span>
+                <div className="flex items-center gap-2">
+                  <input
+                    type="checkbox"
+                    checked={task.completed}
+                    onChange={() => handleToggleCompleted(task)}
+                  />
+                  <span
+                    className={`text-lg ${
+                      task.completed
+                        ? "line-through text-gray-500 opacity-60"
+                        : ""
+                    }`}
+                  >
+                    {task.title}
+                  </span>
+                </div>
                 <button
                   onClick={() => handleDelete(task._id)}
-                  className="text-red-500 hover:text-red-700 text-sm"
+                  className="text-red-500 hover:text-red-700 text-sm flex items-center"
+                  title="Delete task"
                 >
-                  Delete
+                  {/* Ícono visible solo en mobile */}
+                  <FaTrash className="text-base block sm:hidden" />
+
+                  {/* Texto visible solo en pantallas medianas en adelante */}
+                  <span className="hidden sm:inline text-base font-medium">
+                    Delete
+                  </span>
                 </button>
               </li>
             ))}
