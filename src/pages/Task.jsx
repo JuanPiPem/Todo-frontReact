@@ -46,7 +46,7 @@ const Task = () => {
   return (
     <>
       <div className="min-h-screen bg-gray-100 p-6">
-        <div className="max-w-xl mx-auto bg-white p-6 rounded-xl shadow-md">
+        <div className="max-w-xl mx-auto bg-cyan-200 p-6 rounded-xl shadow-md mt-40">
           <h2 className="text-2xl font-semibold mb-4 text-center">My Tasks</h2>
           <form onSubmit={handleCreate} className="flex gap-2 mb-6">
             <input

@@ -25,7 +25,7 @@ const Layout = ({ children }) => {
   return (
     <div className="min-h-screen flex flex-col">
       {!hideLayout && <Header />}
-      <main className={`flex-1 ${!hideLayout ? "mt-16" : ""}`}>{children}</main>
+      <main className={`flex-1 `}>{children}</main>
       {!hideLayout && <Footer />}
     </div>
   );
