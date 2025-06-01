@@ -86,21 +86,40 @@ const Task = () => {
         <div className="flex justify-center gap-4 mb-6">
           <button
             onClick={() => setTheme("light")}
-            className="w-6 h-6 rounded-full bg-white border border-gray-300"
+            className={`w-6 h-6 rounded-full border transition-all duration-200
+      bg-white border-gray-300
+      ${
+        theme === "light"
+          ? "ring-4 ring-blue-400 scale-110 shadow-md"
+          : "opacity-70 hover:opacity-100"
+      }`}
             title="Modo claro"
           ></button>
+
           <button
             onClick={() => setTheme("cyan")}
-            className="w-6 h-6 rounded-full bg-cyan-200 border border-gray-300"
+            className={`w-6 h-6 rounded-full border transition-all duration-200
+      bg-cyan-200 border-gray-300
+      ${
+        theme === "cyan"
+          ? "ring-4 ring-cyan-500 scale-110 shadow-md"
+          : "opacity-70 hover:opacity-100"
+      }`}
             title="Modo cian"
           ></button>
+
           <button
             onClick={() => setTheme("dark")}
-            className="w-6 h-6 rounded-full bg-gray-800 border border-gray-500"
+            className={`w-6 h-6 rounded-full border transition-all duration-200
+      bg-gray-800 border-gray-500
+      ${
+        theme === "dark"
+          ? "ring-4 ring-gray-600 scale-110 shadow-md"
+          : "opacity-70 hover:opacity-100"
+      }`}
             title="Modo oscuro"
           ></button>
         </div>
-
         <div
           className={`max-w-xl mx-auto p-6 rounded-xl shadow-md ${cardBg} ${textColor}`}
         >
