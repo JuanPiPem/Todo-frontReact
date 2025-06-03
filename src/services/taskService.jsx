@@ -1,7 +1,7 @@
 // src/services/taskService.js
 import axios from "axios";
 
-const API_URL = "http://localhost:3000/api/tasks";
+const API_URL = `${import.meta.env.VITE_API_URL}/api/tasks`;
 
 // Agrega el token desde localStorage a cada request
 const getAuthHeaders = () => ({
