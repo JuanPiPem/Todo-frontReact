@@ -1,6 +1,5 @@
-// src/pages/Login.jsx
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 
 const Login = () => {
@@ -14,12 +13,11 @@ const Login = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "http://localhost:3000/api/auth/login",
+        `${import.meta.env.VITE_API_URL}/api/auth/login`,
         form
       );
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
-
       navigate("/tasks");
     } catch (err) {
       alert("Login failed");
@@ -59,9 +57,9 @@ const Login = () => {
         </button>
         <p className="mt-4 text-sm text-center">
           No account?{" "}
-          <a href="/register" className="text-blue-600 hover:underline">
+          <Link to="/register" className="text-blue-600 hover:underline">
             Register
-          </a>
+          </Link>
         </p>
       </form>
     </div>
