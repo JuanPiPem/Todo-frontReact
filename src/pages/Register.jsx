@@ -1,7 +1,6 @@
-// src/pages/Register.jsx
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { register } from "../services/authService";
 
 const Register = () => {
   const [form, setForm] = useState({ name: "", email: "", password: "" });
@@ -13,8 +12,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:3000/api/auth/register", form);
-
+      await register(form);
       navigate("/");
     } catch (err) {
       alert("Registration failed");
